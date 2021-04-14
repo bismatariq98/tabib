@@ -3,6 +3,7 @@ import 'package:tabib/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tabib/model/userModel.dart';
+import 'package:tabib/screen/offers.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -68,32 +69,147 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                    ),
                    Container(
-                     height: 200,
+                     height: 130,
                      width: Get.width,
-                     child: GridView.builder(
-                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                              childAspectRatio: 1.5,
-                                              crossAxisCount: 3,
-                                              mainAxisSpacing: 20.0,
-                                              crossAxisSpacing: 4.0
-                                              ), 
-                                               itemCount:categories.length ,
-                                              itemBuilder:(context,i){
-                                                return Column(
-                                                  children: [
-                                                Container(
-                                                  width: 60,
-                                                  height: 60,
-                                                  decoration: BoxDecoration(
-                                                   borderRadius: BorderRadius.circular(40),
-                                                    color:categories[i].color,
-                                                  ),
-                                                  child:Icon(categories[i].icon),
-                                                ),
-                                                SizedBox(height: 5),
-                                                Text(categories[i].text,style: TextStyle(fontSize: 20),)
-                                                ],);
-                                              }),
+                     child:
+                         Padding(
+                           padding: const EdgeInsets.all(16.0),
+                           child: Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               Column(
+                                                        children: [
+                                                      GestureDetector(
+                                                        onTap: (){
+                                                           Get.to(Offers());
+                                                        },
+                                                        child: Container(
+                                                          width: 60,
+                                                          height: 60,
+                                                          decoration: BoxDecoration(
+                                                           borderRadius: BorderRadius.circular(40),
+                                                            color:Colors.green,
+                                                          ),
+                                                          child:Icon(Icons.local_offer_outlined),
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 5),
+                                                      Text("Offers",style: TextStyle(fontSize: 20),)
+                                                      ],),
+                                                                   Column(
+                                                        children: [
+                                                      Container(
+                                                        width: 60,
+                                                        height: 60,
+                                                        decoration: BoxDecoration(
+                                                         borderRadius: BorderRadius.circular(40),
+                                                          color:Colors.green,
+                                                        ),
+                                                        child:Icon(Icons.local_offer_outlined),
+                                                      ),
+                                                      SizedBox(height: 5),
+                                                      Text("Offers",style: TextStyle(fontSize: 20),)
+                                                      ],),
+                                                                   Column(
+                                                        children: [
+                                                      Container(
+                                                        width: 60,
+                                                        height: 60,
+                                                        decoration: BoxDecoration(
+                                                         borderRadius: BorderRadius.circular(40),
+                                                          color:Colors.green,
+                                                        ),
+                                                        child:Icon(Icons.local_offer_outlined),
+                                                      ),
+                                                      SizedBox(height: 5),
+                                                      Text("Offers",style: TextStyle(fontSize: 20),)
+                                                      ],),
+                             ],
+                             
+                           ),
+                         ),
+                      // GridView.builder(
+                      //  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      //                         childAspectRatio: 1.5,
+                      //                         crossAxisCount: 3,
+                      //                         mainAxisSpacing: 20.0,
+                      //                         crossAxisSpacing: 4.0
+                      //                         ), 
+                      //                          itemCount:categories.length ,
+                      //                         itemBuilder:(context,i){
+                      //                           return 
+                      //                           Column(
+                      //                             children: [
+                      //                           Container(
+                      //                             width: 60,
+                      //                             height: 60,
+                      //                             decoration: BoxDecoration(
+                      //                              borderRadius: BorderRadius.circular(40),
+                      //                               color:categories[i].color,
+                      //                             ),
+                      //                             child:Icon(categories[i].icon),
+                      //                           ),
+                      //                           SizedBox(height: 5),
+                      //                           Text(categories[i].text,style: TextStyle(fontSize: 20),)
+                      //                           ],);
+                      //                         }),
+                   ),
+                      Container(
+                     height: 130,
+                     width: Get.width,
+                     child:
+                         Padding(
+                           padding: const EdgeInsets.all(16.0),
+                           child: Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               Column(
+                                                        children: [
+                                                      Container(
+                                                        width: 60,
+                                                        height: 60,
+                                                        decoration: BoxDecoration(
+                                                         borderRadius: BorderRadius.circular(40),
+                                                          color:Colors.green,
+                                                        ),
+                                                        child:Icon(Icons.local_offer_outlined),
+                                                      ),
+                                                      SizedBox(height: 5),
+                                                      Text("Offers",style: TextStyle(fontSize: 20),)
+                                                      ],),
+                                                                   Column(
+                                                        children: [
+                                                      Container(
+                                                        width: 60,
+                                                        height: 60,
+                                                        decoration: BoxDecoration(
+                                                         borderRadius: BorderRadius.circular(40),
+                                                          color:Colors.green,
+                                                        ),
+                                                        child:Icon(Icons.local_offer_outlined),
+                                                      ),
+                                                      SizedBox(height: 5),
+                                                      Text("Offers",style: TextStyle(fontSize: 20),)
+                                                      ],),
+                                                                   Column(
+                                                        children: [
+                                                      Container(
+                                                        width: 60,
+                                                        height: 60,
+                                                        decoration: BoxDecoration(
+                                                         borderRadius: BorderRadius.circular(40),
+                                                          color:Colors.green,
+                                                        ),
+                                                        child:Icon(Icons.local_offer_outlined),
+                                                      ),
+                                                      SizedBox(height: 5),
+                                                      Text("Offers",style: TextStyle(fontSize: 20),)
+                                                      ],),
+                             ],
+                             
+                           ),
+                         ),
+                 
                    ),
                    Container(height: 70,width: Get.width,
                    decoration: BoxDecoration(
