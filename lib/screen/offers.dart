@@ -18,7 +18,11 @@ class _OffersState extends State<Offers> with SingleTickerProviderStateMixin {
     _tabController =  TabController(vsync: this,length: 2);
   }
 
-
+  @override
+  void dispose() { 
+    _tabController.dispose();
+    super.dispose();
+  }
   TabController _tabController;
   TabBar get _tabs => TabBar(
     controller: _tabController,

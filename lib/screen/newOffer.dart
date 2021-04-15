@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:get/get.dart';
+import 'package:tabib/screen/offerInfo.dart';
 class NewOffer extends StatefulWidget {
   @override
   _NewOfferState createState() => _NewOfferState();
@@ -26,13 +27,18 @@ class _NewOfferState extends State<NewOffer> {
                children: [
                  Padding(
                    padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                   child: Container(
-                     height: 250,
-                     width: Get.width,
-                     decoration: BoxDecoration(
-                       image: DecorationImage(image: AssetImage(
-                        "asset/offer.png"
-                       ),fit: BoxFit.cover)
+                   child: GestureDetector(
+                     onTap: (){
+                       Get.to(OfferInfo());
+                     },
+                     child: Container(
+                       height: 250,
+                       width: Get.width,
+                       decoration: BoxDecoration(
+                         image: DecorationImage(image: AssetImage(
+                          "asset/offer.png"
+                         ),fit: BoxFit.cover)
+                       ),
                      ),
                    ),
                  ),
