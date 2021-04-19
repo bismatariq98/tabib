@@ -1,12 +1,18 @@
 import 'package:tabib/Widget/SettingContainer.dart';
+import 'package:tabib/Widget/bottomButton.dart';
+import 'package:tabib/const/textstyle.dart';
+import 'package:tabib/screen/HomeScreen.dart';
+import 'package:tabib/screen/settings/addClininc.dart';
 import 'package:tabib/screen/settings/chat.dart';
+import 'package:tabib/screen/settings/clinic_login.dart';
 import 'package:tabib/screen/settings/complaint.dart';
 import 'package:tabib/screen/settings/help.dart';
+import 'package:tabib/screen/settings/policies.dart';
 import 'package:tabib/screen/settings/profile.dart';
 import 'package:tabib/screen/settings/notification.dart';
-
 import 'mainScreen.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 
 class Settings extends StatefulWidget {
@@ -15,14 +21,51 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+
+              height: 300,
+              width: Get.width,
+              child: new Wrap(
+                children: <Widget>[
+                  
+                  Center(child: Text("Contact me",style: headingText,)),
+                     SizedBox(height:120),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                  bottomButton("Email"),
+                   bottomButton("Email"),
+                   
+                  ],)
+                 
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Settings",style: TextStyle(color: Colors.black),),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
+       appBar: AppBar(
+          centerTitle: true,
+          title:
+        
+         Text("Settings",style: TextStyle(color: Colors.black),),
+      
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
+      leading: IconButton(icon: Icon(Icons.arrow_back_ios,color:Colors.black), onPressed: (){
+      Navigator.of(context);
+      
+            }),
       ),
         body: Container(
           height: Get.height,
@@ -95,11 +138,34 @@ class _SettingsState extends State<Settings> {
                    },
                   child: SettingContainer(Icons.contact_page,"Complaint")),
                  Divider(height: 3,color: Colors.black,),
-                SettingContainer(Icons.email,"Email"),
+                GestureDetector(
+                  onTap: (){
+                  Get.to(Policies()); 
+                  },
+                  child: SettingContainer(Icons.email,"Policy")),
                  Divider(height: 3,color: Colors.black,),
-                SettingContainer(Icons.add,"Add"),
+                 GestureDetector(
+                     onTap: (){
+               _showPicker(context);
+                  },
+                   child: SettingContainer(Icons.add,"Contact Us")),
                  Divider(height: 3,color: Colors.black,),
-                SettingContainer(Icons.house,"House"),
+                GestureDetector(
+                  onTap: (){
+                   
+                  },
+                  child: SettingContainer(Icons.house,"Instagram")),
+                    Divider(height: 3,color: Colors.black,),
+                GestureDetector(
+                  onTap: (){
+                  Get.to(AddClinic());
+                  },
+                  child: SettingContainer(Icons.house,"Add Clinic")),
+                     GestureDetector(
+                  onTap: (){
+                  Get.to(ClinicLogin());
+                  },
+                  child: SettingContainer(Icons.house,"Clinic Login")),
             ],),
           ),
         ),

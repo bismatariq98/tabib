@@ -1,4 +1,6 @@
 import 'package:tabib/Widget/button.dart';
+import 'package:tabib/Widget/textBox.dart';
+import 'package:tabib/const/textstyle.dart';
 import 'package:tabib/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +16,11 @@ class _ComplaintState extends State<Complaint> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Help",style: TextStyle(color: Colors.black),),
+        appBar: AppBar(
+          centerTitle: true,
+          title:
+        
+         Text("Complaint",style: TextStyle(color: Colors.black),),
       
       backgroundColor: Colors.transparent,
       elevation: 0.0,
@@ -22,11 +28,44 @@ class _ComplaintState extends State<Complaint> {
         Get.to(Settings());
       }),
       ),
-      body: Container(height: Get.height,width: Get.width,
+      body:
+       Container(height: Get.height,width: Get.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children:[
-           
+           Container(height: Get.height/2 -300,width: Get.width,color: Colors.white,
+           child: Row(
+             mainAxisAlignment: MainAxisAlignment.spaceAround,
+             children: [
+             Text("Services",style: normalText,),
+             IconButton(icon: Icon(Icons.more_horiz_outlined), onPressed: (){})
+           ],)
+           ),
+           Container(height: Get.height -150,width: Get.width,
+           color: Color(0xFFEBEFF7),
+           child: Column(
+             children: [
+               Padding(
+                 padding: const EdgeInsets.symmetric(horizontal:30.0,vertical: 20.0),
+                 child: Container(
+                   height: 200,
+                   width: Get.width,
+                   color: Colors.white,
+
+                   child: Column(children:[
+                     Text("Write complaint here",style:normalText),
+                     SizedBox(height: 10,),
+                     textBox("Complaint"),
+                      SizedBox(height: 10,),
+                     button("Start")
+                   ]),
+
+                 ),
+               ),
+             ],
+           )
+      
+           )
       ]),
       ),
       
