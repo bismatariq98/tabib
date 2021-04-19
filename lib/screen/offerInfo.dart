@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tabib/screen/bookings.dart';
 import 'package:tabib/screen/offer_detail.dart';
+import 'package:tabib/screen/pictures.dart';
+import 'package:tabib/screen/reviews.dart';
 
 
 class OfferInfo extends StatefulWidget {
@@ -29,7 +31,7 @@ class _OfferInfoState extends State<OfferInfo> with SingleTickerProviderStateMix
    tabs: [
      Tab(text: "Detail",),
      Tab(text: "Info",),
-     Tab(text: "Info",),
+     Tab(text: "Review",),
      Tab(text: "Info",),
    ],
   );
@@ -53,7 +55,7 @@ class _OfferInfoState extends State<OfferInfo> with SingleTickerProviderStateMix
         child: Column(
           children: [
                 Container(
-                  height: 320,
+                  height: 250,
                   width: Get.width,
                   decoration: BoxDecoration(
                     image: DecorationImage(image: AssetImage(
@@ -74,8 +76,8 @@ class _OfferInfoState extends State<OfferInfo> with SingleTickerProviderStateMix
                     children: [
                      OfferDetail(),
                       Bookings(),
-                      Text("asda"),
-                      Text("asda"),
+                      Reviews(),
+                      Pictures(),
                     ]),
                 )
           ],

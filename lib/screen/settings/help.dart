@@ -1,17 +1,18 @@
+import 'package:tabib/Widget/button.dart';
 import 'package:tabib/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tabib/model/vehicle.dart';
+import 'package:tabib/screen/Settings.dart';
 
 
-class Bookings extends StatefulWidget {
+class Help extends StatefulWidget {
   @override
-  _BookingsState createState() => _BookingsState();
+  _HelpState createState() => _HelpState();
 }
 
-class _BookingsState extends State<Bookings> {
-  
-  _buildExpandableContent(Vehicle vehicle) {
+class _HelpState extends State<Help> {
+   _buildExpandableContent(Vehicle vehicle) {
     List<Widget> columnContent = [];
 
     for (String content in vehicle.contents)
@@ -27,7 +28,16 @@ class _BookingsState extends State<Bookings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+       appBar: AppBar(title: Text("Help",style: TextStyle(color: Colors.black),),
+      
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
+      leading: IconButton(icon: Icon(Icons.arrow_back_ios,color:Colors.black), onPressed: (){
+        Get.to(Settings());
+      }),
+      ),
+      body: 
+   Container(
         height: Get.height,
         width: Get.width,
          child:  Column(
@@ -57,7 +67,6 @@ class _BookingsState extends State<Bookings> {
          ),
         
       ),
-      
     );
   }
 }

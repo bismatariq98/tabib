@@ -40,6 +40,47 @@ class _LoginPageState extends State<LoginPage> {
           
         ],),
         SizedBox(height: 10,),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal:8 ),
+        //   child: TextFormField(
+        //        decoration: InputDecoration(
+        //        border: new OutlineInputBorder(
+        //               borderSide: new BorderSide(color: Colors.teal)),
+        //          hintText: "Mobile Number",
+        //          prefixIcon: Icon(Icons.mobile_friendly),
+
+        //        ),
+        //      ),
+        // ),
+         
+
+        //        SizedBox(height: 10,),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal:8 ),
+        //   child: TextFormField(
+        //        decoration: InputDecoration(
+        //        border: new OutlineInputBorder(
+        //               borderSide: new BorderSide(color: Colors.teal)),
+        //          hintText: "Mobile Number",
+        //          prefixIcon: Icon(Icons.mobile_friendly),
+
+        //        ),
+        //      ),
+        // ),
+        //       SizedBox(height: 10,),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal:8 ),
+        //   child: TextFormField(
+        //        decoration: InputDecoration(
+        //        border: new OutlineInputBorder(
+        //               borderSide: new BorderSide(color: Colors.teal)),
+        //          hintText: "Mobile Number",
+        //          prefixIcon: Icon(Icons.mobile_friendly),
+
+        //        ),
+        //      ),
+        // ),
+
          Container(
            height: 60,width: Get.width,
            decoration: BoxDecoration(
