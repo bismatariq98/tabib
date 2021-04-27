@@ -1,6 +1,7 @@
 import 'package:tabib/Widget/SettingContainer.dart';
 import 'package:tabib/Widget/bottomButton.dart';
 import 'package:tabib/const/textstyle.dart';
+import 'package:tabib/controller/user_controller.dart';
 import 'package:tabib/screen/HomeScreen.dart';
 import 'package:tabib/screen/settings/addClininc.dart';
 import 'package:tabib/screen/settings/chat.dart';
@@ -12,7 +13,7 @@ import 'package:tabib/screen/settings/profile.dart';
 import 'package:tabib/screen/settings/notification.dart';
 import 'mainScreen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 
 class Settings extends StatefulWidget {
@@ -21,6 +22,8 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+     UserController userController  = Get.put(UserController());
+  
   void _showPicker(context) {
     showModalBottomSheet(
         context: context,
@@ -67,40 +70,71 @@ class _SettingsState extends State<Settings> {
       
             }),
       ),
-        body: Container(
+        body: 
+      GetBuilder<UserController>(builder: (_){
+
+        return Container(
           height: Get.height,
           width: Get.width,
 
-          child: SingleChildScrollView(
-            child: Column(
+          child:
+                 SingleChildScrollView(
+            child: 
+          
+             Column(
               children: [
-               
 
-               Padding(
-                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                 child: Container(
-                   height: Get.height/2 -300,width: Get.width,
-                     decoration: BoxDecoration(
-                       color: Colors.pink,
-                        borderRadius: BorderRadius.circular(30),
-                        
-                     ),
-                     child: Padding(
-                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                       child: Row(
-                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                         children: [
-                         Row(children: [
-                           Text("Wallet",style: TextStyle(color: Colors.white,fontSize: 25),),
-                           Icon(Icons.wallet_giftcard,color: Colors.white,),
+            
+                   Container(
+                     height: Get.height/2 -300,width: Get.width,
+                       decoration: BoxDecoration(
+                         color: Colors.pink,
+               
+                          
+                       ),
+                       child: Padding(
+                         padding: const EdgeInsets.symmetric(horizontal: 20),
+                         child: Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           children: [
+                             Text("Customer Mode",style: TextStyle(color: Colors.white,fontSize: 25),),
+                                   FlutterSwitch(
+                                     activeColor: Colors.red[100],
+                      value: _.status1,
+                      onToggle: (val) {
+                        setState(() {
+                          _.status1 = val;
+                        });
+                      },
+                    ),  
+                          
                          ],),
-                         Row(children: [
-                           Text("SR",style: TextStyle(color: Colors.white,fontSize: 25),),
-                           Text("100",style: TextStyle(color: Colors.white,fontSize: 25),),
-                         ],),
+                       ),
+                   ),
+
+               
+               Container(
+                 height: Get.height/2 -300,width: Get.width,
+                   decoration: BoxDecoration(
+                     color: Colors.pink,
+                      
+                      
+                   ),
+                   child: Padding(
+                     padding: const EdgeInsets.symmetric(horizontal: 20),
+                     child: Row(
+                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: [
+                       Row(children: [
+                         Text("Wallet",style: TextStyle(color: Colors.white,fontSize: 25),),
+                         Icon(Icons.wallet_giftcard,color: Colors.white,),
                        ],),
-                     ),
-                 ),
+                       Row(children: [
+                         Text("SR",style: TextStyle(color: Colors.white,fontSize: 25),),
+                         Text("100",style: TextStyle(color: Colors.white,fontSize: 25),),
+                       ],),
+                     ],),
+                   ),
                ),
 
 
@@ -166,9 +200,20 @@ class _SettingsState extends State<Settings> {
                   Get.to(ClinicLogin());
                   },
                   child: SettingContainer(Icons.house,"Clinic Login")),
-            ],),
+            ],)
+          
+            
+            
           ),
-        ),
+         
+      
+        );
+
+      })
+          
+        
+        
+     
     );
   }
 }
