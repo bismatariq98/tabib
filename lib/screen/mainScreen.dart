@@ -4,6 +4,7 @@ import 'package:tabib/screen/HomeScreen.dart';
 import 'package:tabib/screen/LoginPage.dart';
 import 'package:tabib/screen/Settings.dart';
 import 'package:tabib/screen/Appointment.dart';
+import 'package:tabib/screen/tapcoder.dart';
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -11,7 +12,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 2;
   List _pages = [
-     Text("Hello"),
+    // PinCodeVerificationScreen("0908787878"),
+    Text("hello"),
    Appointment(),
     HomeScreen(),
     LoginPage(),

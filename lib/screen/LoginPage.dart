@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tabib/controller/user_sign_in_controller.dart';
 
 import 'mainScreen.dart';
@@ -69,7 +70,8 @@ class _LoginPageState extends State<LoginPage> {
                       RaisedButton(
                           color: Colors.greenAccent[200],
                           onPressed: () async {
-                            signInWithPhoneNumber();
+                         
+                            // signInWithPhoneNumber();
                           },
                           child: Text("Sign in")),
                     ),

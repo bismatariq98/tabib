@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:tabib/screen/Settings.dart';
+import 'package:tabib/screen/tapcoder.dart';
  
    TextEditingController smsController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -15,6 +17,7 @@ String _verificationId;
       PhoneVerificationCompleted verificationCompleted =
     (PhoneAuthCredential phoneAuthCredential) async {
   await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
+
   Get.snackbar("Verifucation", "Verification Complete");
   
 };
@@ -41,19 +44,29 @@ PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
 PhoneCodeSent codeSent =
     (String verificationId, [int forceResendingToken]) async {
         Get.snackbar("code sent","Please check your phone for the verification code." );
-
+       
   _verificationId = verificationId;
+     if(codeSent != null){
+       print(codeSent);
+        
+       Get.to(PinCodeVerificationScreen(phoneController.text));
+     }
+   
 };
 
 phoneSignIn() async{
+
+  User user;
 try {
-  await FirebaseAuth.instance.verifyPhoneNumber(
+       await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phoneController.text,
       timeout: const Duration(seconds: 5),
       verificationCompleted: verificationCompleted,
       verificationFailed: verificationFailed,
       codeSent: codeSent,
       codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+
+
 } catch (e) {
   Get.snackbar("title", "messag");
 }
@@ -62,19 +75,36 @@ try {
 
 
 
-void signInWithPhoneNumber() async {
+void signInWithPhoneNumber(String text) async {
   try {
     final AuthCredential credential = PhoneAuthProvider.credential(
       verificationId: _verificationId,
-      smsCode: smsController.text,
+      // smsCode: smsController.text,
+     smsCode: text,
     );
 
     final User user = (await FirebaseAuth.instance.signInWithCredential(credential)).user;
-     Get.snackbar("title", "Successfully signed in UID: ${user.uid}");
+         
+         if(user != null){
+           
+           Get.to(Settings());
+              Get.snackbar("title", "Successfully signed in UID: ${user.uid}");
+         }
+  
+
+
     
   } catch (e) {
  Get.snackbar("title", "$e");
   }
+
+
+
+}
+
+signOut()async{
+  await FirebaseAuth.instance.signOut();
+  // Get.offAll(MyHomePage());
 }
 
 

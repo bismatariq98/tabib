@@ -15,6 +15,7 @@ import 'mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
+import 'package:tabib/controller/user_sign_in_controller.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -62,6 +63,12 @@ class _SettingsState extends State<Settings> {
           title:
         
          Text("Settings",style: TextStyle(color: Colors.black),),
+
+         actions: [
+           IconButton(icon: Icon(Icons.logout,color: Colors.black,), onPressed: (){
+             signOut();
+           })
+         ],
       
       backgroundColor: Colors.transparent,
       elevation: 0.0,
