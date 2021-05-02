@@ -9,7 +9,7 @@ class ServiceProvider {
       this.streetName,
       this.phoneNumber,
       this.email,
-      
+       this.approved
       });
 
   String serviceProvideName;
@@ -17,25 +17,28 @@ class ServiceProvider {
   String city;
   String streetName;
   String phoneNumber;
+  bool approved;
   
   String email;
  
 
   factory ServiceProvider.fromDocumentSnapShot(DocumentSnapshot doc) => ServiceProvider(
       serviceProvideName: doc.data()["serviceProviderName"],
-      city: doc.data()["city"],
-      streetName: doc.data()["streetName"],
-      phoneNumber: doc.data()["phoneNumber"],
-     email: doc.data()["email"],
+      city: doc.data()["serviceProviderCity"],
+      streetName: doc.data()["serviceProviderStreet"],
+      phoneNumber: doc.data()["serviceProviderPhone"],
+     email: doc.data()["serviceProviderEmail"],
+     approved: doc.data()["approved"]
      
   );
 
   Map<String, dynamic> toMap() => {
         "serviceProviderName": serviceProvideName,
-        "city": city,
-        "streetName": streetName,
-        "phoneNumber": phoneNumber,
-        "email": email,
+        "serviceProviderCity": city,
+        "serviceProviderStreet": streetName,
+        "serviceProviderPhone": phoneNumber,
+        "serviceProviderEmail": email,
+        "approved":approved,
        
       };
 }

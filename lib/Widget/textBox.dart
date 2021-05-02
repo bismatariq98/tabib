@@ -1,11 +1,14 @@
+import 'package:flutter/services.dart';
 import 'package:tabib/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-Widget textBox(String text) {
+Widget textBox( {text='',validator,keyboadType,controller,}) {
 
   return TextFormField(
+              controller: controller,
+              validator: validator,
                 decoration: new 
             InputDecoration(
                 labelText: text,
@@ -25,7 +28,7 @@ Widget textBox(String text) {
                 ),
 ),
           
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: keyboadType,
                 style: new TextStyle(
                   fontFamily: "Poppins",
                 ),

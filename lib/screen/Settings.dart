@@ -1,9 +1,12 @@
 import 'package:tabib/Widget/SettingContainer.dart';
 import 'package:tabib/Widget/bottomButton.dart';
 import 'package:tabib/const/textstyle.dart';
+import 'package:tabib/controller/admin_controller.dart';
 import 'package:tabib/controller/user_controller.dart';
 import 'package:tabib/screen/HomeScreen.dart';
+import 'package:tabib/screen/settings/AdminScreens/admin_home_Screen.dart';
 import 'package:tabib/screen/settings/addClininc.dart';
+import 'package:tabib/screen/settings/AdminScreens/adminLogin.dart';
 import 'package:tabib/screen/settings/chat.dart';
 import 'package:tabib/screen/settings/clinic_login.dart';
 import 'package:tabib/screen/settings/complaint.dart';
@@ -16,15 +19,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:tabib/controller/user_sign_in_controller.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import 'settings/AdminScreens/approval_waiting.dart';
 class Settings extends StatefulWidget {
   @override
   _SettingsState createState() => _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
-     UserController userController  = Get.put(UserController());
-  
+  AdminController adminController =Get.put(AdminController());
+  UserController userController = Get.put(UserController());
+
+   
   void _showPicker(context) {
     showModalBottomSheet(
         context: context,
@@ -57,6 +64,8 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
+ 
+    bool isloading =false;
     return Scaffold(
        appBar: AppBar(
           centerTitle: true,
@@ -67,7 +76,15 @@ class _SettingsState extends State<Settings> {
          actions: [
            IconButton(icon: Icon(Icons.logout,color: Colors.black,), onPressed: (){
              signOut();
-           })
+            
+           }),
+              IconButton(icon: Icon(Icons.email,color: Colors.black,), onPressed: (){
+              Get.to(()=>AdminHomeScreen());
+             
+
+            
+           }),
+             
          ],
       
       backgroundColor: Colors.transparent,
@@ -78,9 +95,8 @@ class _SettingsState extends State<Settings> {
             }),
       ),
         body: 
-      GetBuilder<UserController>(builder: (_){
-
-        return Container(
+        GetBuilder<UserController> (builder: (_){
+          return     Container(
           height: Get.height,
           width: Get.width,
 
@@ -90,7 +106,8 @@ class _SettingsState extends State<Settings> {
           
              Column(
               children: [
-
+                 
+      
             
                    Container(
                      height: Get.height/2 -300,width: Get.width,
@@ -104,13 +121,15 @@ class _SettingsState extends State<Settings> {
                          child: Row(
                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            children: [
-                             Text("Customer Mode",style: TextStyle(color: Colors.white,fontSize: 25),),
+                             _.status1 == false ?
+                             Text("Customer Mode",style: TextStyle(color: Colors.white,fontSize: 25),): Text("Admin Mode",style: TextStyle(color: Colors.white,fontSize: 25),),
                                    FlutterSwitch(
                                      activeColor: Colors.red[100],
                       value: _.status1,
                       onToggle: (val) {
                         setState(() {
                           _.status1 = val;
+                          print(_.status1);
                         });
                       },
                     ),  
@@ -207,6 +226,11 @@ class _SettingsState extends State<Settings> {
                   Get.to(ClinicLogin());
                   },
                   child: SettingContainer(Icons.house,"Clinic Login")),
+                       GestureDetector(
+                  onTap: (){
+                  Get.to(AdminLogin());
+                  },
+                  child: SettingContainer(Icons.house,"Admin Login")),
             ],)
           
             
@@ -215,8 +239,10 @@ class _SettingsState extends State<Settings> {
          
       
         );
+        },)
+    
 
-      })
+     
           
         
         

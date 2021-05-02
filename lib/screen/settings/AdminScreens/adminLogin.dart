@@ -5,31 +5,32 @@ import 'package:tabib/controller/user_controller.dart';
 import 'package:tabib/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tabib/model/vehicle.dart';
 import 'package:tabib/screen/Settings.dart';
 import 'package:tabib/screen/mainScreen.dart';
 
 
-class ClinicLogin extends StatefulWidget {
+
+class AdminLogin extends StatefulWidget {
   @override
-  _ClinicLoginState createState() => _ClinicLoginState();
+  _AdminLoginState createState() => _AdminLoginState();
 }
 
-class _ClinicLoginState extends State<ClinicLogin> {
+class _AdminLoginState extends State<AdminLogin> {
+  UserController userController = Get.put(UserController());
   @override
   Widget build(BuildContext context) {
     return 
-    Scaffold(
+ Scaffold(
       appBar: AppBar(
           centerTitle: true,
           title:
         
-         Text("Clinic Login",style: TextStyle(color: Colors.black),),
+         Text("Admin Login",style: TextStyle(color: Colors.black),),
       
       backgroundColor: Colors.transparent,
       elevation: 0.0,
       leading: IconButton(icon: Icon(Icons.arrow_back_ios,color:Colors.black), onPressed: (){
-      Get.to(MainScreen());
+      Get.to( MainScreen());
       
             }),
       ),
@@ -69,7 +70,7 @@ class _ClinicLoginState extends State<ClinicLogin> {
                    child: Padding(
                      padding: const EdgeInsets.all(14.0),
                      child: Column(children:[
-                       Text("Clinic Login",style:normalText),
+                       Text("Admin Login",style:normalText),
                        SizedBox(height: 10,),
                              textBox(text:"Email",   
               validator: (input) {
