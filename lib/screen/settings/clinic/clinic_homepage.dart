@@ -2,12 +2,12 @@ import 'package:tabib/Widget/button.dart';
 import 'package:tabib/Widget/textBox.dart';
 import 'package:tabib/const/textstyle.dart';
 import 'package:tabib/controller/clinic_controller.dart';
-import 'package:tabib/main.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:time_range_picker/time_range_picker.dart';
-import 'dart:async';
-import 'package:multi_image_picker/multi_image_picker.dart';
+
+
 
 class ClinicHomePage extends StatefulWidget {
   @override
@@ -17,27 +17,14 @@ class ClinicHomePage extends StatefulWidget {
 class _ClinicHomePageState extends State<ClinicHomePage> {
    
 
-     List<Asset> images = <Asset>[];
-  String _error = 'No Error Dectected';
+
 
   // @override
   // void initState() {
   //   super.initState();
   // }
 
-  Widget buildGridView() {
-    return GridView.count(
-      crossAxisCount: 3,
-      children: List.generate(images.length, (index) {
-        Asset asset = images[index];
-        return AssetThumb(
-          asset: asset,
-          width: 300,
-          height: 300,
-        );
-      }),
-    );
-  }
+
 
  
 

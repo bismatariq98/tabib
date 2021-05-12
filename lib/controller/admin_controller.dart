@@ -20,6 +20,7 @@ class AdminController extends GetxController {
     List<ServiceProvider> approvalWaiting = [];
     List<Services> servicesApprovalWaiting = [];
     List<ServiceProvider> approvedClinic = [];
+    List<Services> serviceApproved = [];
    Loader loader = Get.put(Loader());
    TextEditingController loginEmailController = TextEditingController();
     TextEditingController loginPasswordController = TextEditingController();
@@ -44,11 +45,25 @@ var currentUserId;
       update();
     }
   }
-     
+
+
+     showApprovedService()async{
+       serviceApproved.clear();
+      await  FirebaseFirestore.instance.collection("AddService").where('approved', isEqualTo:true).get().then((value)  {
+       if(value.size > 0){
+         value.docs.forEach((element) {
+            var serviceApprovedVar = Services.fromDocumentSnapShot(element);
+            serviceApproved.add(serviceApprovedVar);
+         });
+         update();
+        
+       }
+      });
+     }   
 
      showclinicApproved()async{
        approvedClinic.clear();
-      await  FirebaseFirestore.instance.collection("AddService").where('approved', isEqualTo:true).get().then((value)  {
+      await  FirebaseFirestore.instance.collection("clinicapproval").where('approved', isEqualTo:true).get().then((value)  {
        if(value.size > 0){
          value.docs.forEach((element) {
             var approvedClinicQuery = ServiceProvider.fromDocumentSnapShot(element);

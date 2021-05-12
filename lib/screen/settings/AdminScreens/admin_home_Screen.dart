@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:tabib/screen/settings/AdminScreens/ApprovedClinic.dart';
 import 'package:tabib/screen/settings/AdminScreens/approval_waiting.dart';
 import 'package:tabib/screen/settings/AdminScreens/approved.dart';
+import 'package:tabib/screen/settings/AdminScreens/approved_Services.dart';
 import 'package:tabib/screen/settings/AdminScreens/serviceApproval.dart';
 
 
@@ -23,6 +24,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with  SingleTickerPro
   void initState() {
     adminController.showData();
     adminController.showServiceData();
+   
   }
 
 
@@ -31,6 +33,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with  SingleTickerPro
   Widget build(BuildContext context) {
     adminController.showData();
     adminController.showServiceData();
+     adminController.showApprovedService();
     return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.pink,
@@ -48,7 +51,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with  SingleTickerPro
            ),
          body: 
          DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
           body: Container(
             height: 900,
@@ -67,6 +70,9 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with  SingleTickerPro
                             break;
                           case 2:
                               adminController.showServiceData();
+                            break;
+                            case 3:
+                            adminController.showApprovedService();
                             break;
                         }
                       },
@@ -95,6 +101,10 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with  SingleTickerPro
                         Tab(
                           // icon: Icon(Icons.directions_transit),
                           text: "Service Approval",
+                        ),
+                        Tab(
+                          // icon: Icon(Icons.directions_transit),
+                          text: "Approved Services",
                         )
                       ]),
                 ),
@@ -105,7 +115,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with  SingleTickerPro
                      ApprovalWaiting(),
                        ApprovedClinic(),
                          ServiceApproval(),
-                     
+                       ApprovedServices(),
                       // Center(
                       //   child: Icon(Icons.directions_bike),
                       // ),

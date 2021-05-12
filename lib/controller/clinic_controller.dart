@@ -49,6 +49,7 @@ Map subCatMap =
      serviceProvider.timing = times.toString();
      serviceProvider.category = selectedCat;
      serviceProvider.subCategory = selectedSubCat;
+     serviceProvider.description = description.text;
      try{
     await FirebaseFirestore.instance.collection("AddService").doc(currentUserId).set({
            "serviceName" :serviceProvider.serviceName,
@@ -60,6 +61,8 @@ Map subCatMap =
            "subCategory":serviceProvider.subCategory,
            "displayImage":"",
            "id":currentUserId,
+           "description":serviceProvider.description,
+           "approved":false,
            
 
     });
@@ -88,6 +91,7 @@ Map subCatMap =
       TextEditingController serviceDescriptionController = TextEditingController();
        TextEditingController actualPriceController = TextEditingController();
         TextEditingController discountPriceController = TextEditingController();
+         TextEditingController description = TextEditingController();
    clearForm (){
      loginEmailController.text = '';
      loginPasswordController.text = '';
