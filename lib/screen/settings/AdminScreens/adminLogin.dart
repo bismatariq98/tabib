@@ -1,6 +1,7 @@
 import 'package:tabib/Widget/button.dart';
 import 'package:tabib/Widget/textBox.dart';
 import 'package:tabib/const/textstyle.dart';
+import 'package:tabib/controller/admin_controller.dart';
 import 'package:tabib/controller/user_controller.dart';
 import 'package:tabib/main.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class AdminLogin extends StatefulWidget {
 }
 
 class _AdminLoginState extends State<AdminLogin> {
-  UserController userController = Get.put(UserController());
+  AdminController adminController = Get.put(AdminController());
   @override
   Widget build(BuildContext context) {
     return 
@@ -35,7 +36,7 @@ class _AdminLoginState extends State<AdminLogin> {
             }),
       ),
       body:
-      GetBuilder<UserController>(builder: (_){
+      GetBuilder<AdminController>(builder: (_){
        return  
        Container(
         height: Get.height,
@@ -84,7 +85,7 @@ class _AdminLoginState extends State<AdminLogin> {
                               return 'Please Enter a Valid Email';
                             }
                           },
-                          controller: _.emailController,
+                          controller: _.loginEmailController,
                           keyboadType: TextInputType.emailAddress,
                           ),
                         SizedBox(height: 10,),
@@ -103,7 +104,7 @@ class _AdminLoginState extends State<AdminLogin> {
                               return 'Password should not be greater than 6 digits ';
                             }
                           },
-                          controller: _.passwordController,
+                          controller: _.loginPasswordController,
                           keyboadType: TextInputType.emailAddress,
                           ),
                           Row(
@@ -114,7 +115,11 @@ class _AdminLoginState extends State<AdminLogin> {
 
                           ],),
                             SizedBox(height: 10,),
-                       button("Login")
+                       GestureDetector(
+                         onTap: () async{
+                          await  _.signIn();
+                         },
+                         child: button("Login"))
                      ]),
                    ),
 

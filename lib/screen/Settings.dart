@@ -8,12 +8,13 @@ import 'package:tabib/screen/settings/AdminScreens/admin_home_Screen.dart';
 import 'package:tabib/screen/settings/addClininc.dart';
 import 'package:tabib/screen/settings/AdminScreens/adminLogin.dart';
 import 'package:tabib/screen/settings/chat.dart';
-import 'package:tabib/screen/settings/clinic_login.dart';
+import 'package:tabib/screen/settings/clinic/clinic_login.dart';
 import 'package:tabib/screen/settings/complaint.dart';
 import 'package:tabib/screen/settings/help.dart';
 import 'package:tabib/screen/settings/policies.dart';
 import 'package:tabib/screen/settings/profile.dart';
 import 'package:tabib/screen/settings/notification.dart';
+import 'package:tabib/screen/sub_Cat.dart';
 import 'mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -84,6 +85,14 @@ class _SettingsState extends State<Settings> {
 
             
            }),
+      IconButton(icon: Icon(Icons.email,color: Colors.black,), onPressed: (){
+              Get.to(()=>HomePagez());
+             
+
+            
+           }),
+
+
              
          ],
       

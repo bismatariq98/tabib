@@ -9,7 +9,7 @@ import 'package:tabib/model/service_provider_model.dart';
 class UserController extends GetxController {
           
         ServiceProvider serviceProvider =  new ServiceProvider();
-
+   Loader loader = Get.put(Loader());
       TextEditingController serviceProviderNameController =  TextEditingController();
        TextEditingController cityController =  TextEditingController();
         TextEditingController streetNameController =  TextEditingController();
@@ -34,7 +34,7 @@ FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
     addClinic()  async{
       isLoading = true;
-               
+              loader.loadingShow();   
               //  loading.loadingShow();
       
       serviceProvider.email = emailController.text;
@@ -48,6 +48,7 @@ FirebaseAuth firebaseAuth = FirebaseAuth.instance;
                "serviceProviderCity":serviceProvider.city,
                "serviceProviderPhone":serviceProvider.phoneNumber,
                "serviceProviderStreet":serviceProvider.streetName,
+               "approved":false,
             }
             ).then((value)  {
                isLoading = false;

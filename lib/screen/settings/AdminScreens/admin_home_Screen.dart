@@ -1,9 +1,11 @@
+import 'package:tabib/const/textstyle.dart';
 import 'package:tabib/controller/admin_controller.dart';
 import 'package:tabib/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tabib/screen/settings/AdminScreens/approval_waiting.dart';
 import 'package:tabib/screen/settings/AdminScreens/approved.dart';
+import 'package:tabib/screen/settings/AdminScreens/serviceApproval.dart';
 
 
 class AdminHomeScreen extends StatefulWidget {
@@ -19,6 +21,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with  SingleTickerPro
   // ignore: must_call_super
   void initState() {
     adminController.showData();
+    adminController.showServiceData();
   }
 
 
@@ -26,8 +29,21 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with  SingleTickerPro
   @override
   Widget build(BuildContext context) {
     adminController.showData();
+    adminController.showServiceData();
     return Scaffold(
             appBar: AppBar(
+              backgroundColor: Colors.pink,
+              automaticallyImplyLeading: false,
+              title: Text("Admin Login"),
+              centerTitle: true,
+              actions: [
+                Row(children: [
+                  Text("Logout",style: normalTextWhite,),
+                  IconButton(icon: Icon(Icons.logout), onPressed: () async{
+                   await  adminController.signout();
+                  })
+                ],)
+              ],
            ),
          body: 
          DefaultTabController(
@@ -49,7 +65,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with  SingleTickerPro
                              adminController.showData();
                             break;
                           case 2:
-                              adminController.showData();
+                              adminController.showServiceData();
                             break;
                         }
                       },
@@ -69,15 +85,15 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with  SingleTickerPro
                           //     },
                           //     child: Text('tapp')),
                           // icon: Icon(Icons.directions_car),
-                          text: "Suggested Friends",
+                          text: "Clinic Approval",
                         ),
                         Tab(
                           // icon: Icon(Icons.directions_transit),
-                          text: "Friends Request",
+                          text: "Approved Clinic",
                         ),
                         Tab(
                           // icon: Icon(Icons.directions_transit),
-                          text: "Friends",
+                          text: "Service Approval",
                         )
                       ]),
                 ),
@@ -87,7 +103,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with  SingleTickerPro
                     children: <Widget>[
                      ApprovalWaiting(),
                        ApprovalWaiting(),
-                         ApprovalWaiting(),
+                         ServiceApproval(),
                      
                       // Center(
                       //   child: Icon(Icons.directions_bike),

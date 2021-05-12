@@ -5,24 +5,27 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-class ApprovalWaiting extends StatefulWidget {
+
+class ServiceApproval extends StatefulWidget {
   @override
-  _ApprovalWaitingState createState() => _ApprovalWaitingState();
+  _ServiceApprovalState createState() => _ServiceApprovalState();
 }
 
-class _ApprovalWaitingState extends State<ApprovalWaiting> {
-  int booList;
+class _ServiceApprovalState extends State<ServiceApproval> {
+   int booList;
 
   AdminController adminController = Get.put(AdminController());
   @override
   Widget build(BuildContext context) {
-    adminController.showData();
-    return Scaffold(body: GetBuilder<AdminController>(builder: (_) {
+      adminController.showData();
+    adminController.showServiceData();
+    return 
+    Scaffold(body: GetBuilder<AdminController>(builder: (_) {
       return Container(
         child:
             //  Text("hello"),
             ListView.builder(
-                itemCount: _.approvalWaiting.length,
+                itemCount: _.servicesApprovalWaiting.length,
                 itemBuilder: (context, i) {
                   return Container(
                     height: Get.height / 2 - 100,
@@ -36,52 +39,77 @@ class _ApprovalWaitingState extends State<ApprovalWaiting> {
                         children: [
                           Row(
                             children: [
-                              Text("Name:", style: normalText),
+                              Text("Name:-", style: normalText),
                               Text(
-                                _.approvalWaiting[i].serviceProvideName,
+                                _.servicesApprovalWaiting[i].serviceProvideName,
                                 style: normalText,
                               ),
                             ],
                           ),
                           Row(
                             children: [
-                              Text("Email:", style: normalText),
+                              Text("Service Name:-", style: normalText),
                               Text(
-                                _.approvalWaiting[i].email,
+                                _.servicesApprovalWaiting[i].serviceName,
+                                style: normalText,
+                              ),
+                            ],
+                          ),
+                                   Row(
+                            children: [
+                              Text("Description:-", style: normalText),
+                              Text(
+                                _.servicesApprovalWaiting[i].description,
                                 style: normalText,
                               ),
                             ],
                           ),
                           Row(
                             children: [
-                              Text("City:", style: normalText),
+                              Text("Category:-", style: normalText),
                               Text(
-                                _.approvalWaiting[i].city,
+                                _.servicesApprovalWaiting[i].category,
                                 style: normalText,
                               ),
                             ],
                           ),
                           Row(
                             children: [
-                              Text("Phone:", style: normalText),
+                              Text("SubCategory:-", style: normalText),
                               Text(
-                                _.approvalWaiting[i].phoneNumber,
+                                 _.servicesApprovalWaiting[i].subCategory,
                                 style: normalText,
                               ),
                             ],
                           ),
                           Row(
                             children: [
-                              Text("Street:", style: normalText),
+                              Text("Timing:-", style: normalText),
                               Text(
-                                _.approvalWaiting[i].streetName,
+                                _.servicesApprovalWaiting[i].timing.toString(),
+                                style: normalText,
+                              ),
+                            ],
+                          ),
+                           Row(
+                            children: [
+                              Text("Actual Price:-", style: normalText),
+                              Text(
+                                _.servicesApprovalWaiting[i].actualPrice.toString(),
+                                style: normalText,
+                              ),
+                            ],
+                          ),
+                           Row(
+                            children: [
+                              Text("Discounted Price:-", style: normalText),
+                              Text(
+                                _.servicesApprovalWaiting[i].discountedPrice.toString(),
                                 style: normalText,
                               ),
                             ],
                           ),
                           ToggleSwitch(
-                         
-
                             minWidth: 90.0,
                             cornerRadius: 20.0,
                             activeBgColor: Colors.cyan,
@@ -89,20 +117,20 @@ class _ApprovalWaitingState extends State<ApprovalWaiting> {
                             inactiveBgColor: Colors.grey,
                             inactiveFgColor: Colors.white,
                             initialLabelIndex:
-                                _.approvalWaiting[i].approved == true ? 1 : 0,
+                              _.servicesApprovalWaiting[i].approved == true ? 1 : 0,
                             labels: ['NO', 'YES'],
                             icons: [Icons.email, Icons.emoji_emotions_rounded],
 
                             onToggle: (index) {
                               if (index == 1) {
-                                _.approvalWaiting[i].ref
+                                  _.servicesApprovalWaiting[i].ref
                                     .update({'approved': true});
-                                _.approvalWaiting[i].approved = true;
+                                 _.servicesApprovalWaiting[i].approved  = true;
                                 _.update();
                               } else {
-                                _.approvalWaiting[i].ref
+                                _.servicesApprovalWaiting[i].ref
                                     .update({'approved': false});
-                                _.approvalWaiting[i].approved = false;
+                                 _.servicesApprovalWaiting[i].approved = false;
                                 _.update();
                               }
                              

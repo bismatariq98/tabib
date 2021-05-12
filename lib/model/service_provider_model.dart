@@ -9,7 +9,8 @@ class ServiceProvider {
       this.streetName,
       this.phoneNumber,
       this.email,
-       this.approved
+       this.approved,
+       this.ref,
       });
 
   String serviceProvideName;
@@ -18,7 +19,7 @@ class ServiceProvider {
   String streetName;
   String phoneNumber;
   bool approved;
-  
+  DocumentReference ref;
   String email;
  
 
@@ -28,7 +29,8 @@ class ServiceProvider {
       streetName: doc.data()["serviceProviderStreet"],
       phoneNumber: doc.data()["serviceProviderPhone"],
      email: doc.data()["serviceProviderEmail"],
-     approved: doc.data()["approved"]
+     approved: doc.data()["approved"],
+     ref: doc.reference
      
   );
 
