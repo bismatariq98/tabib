@@ -9,6 +9,7 @@ import 'package:tabib/screen/settings/AdminScreens/admin_home_Screen.dart';
 import 'package:tabib/model/service_provider_model.dart';
 
 import '../model/service_add.dart';
+import '../model/service_provider_model.dart';
 
 
 
@@ -18,6 +19,7 @@ class AdminController extends GetxController {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     List<ServiceProvider> approvalWaiting = [];
     List<Services> servicesApprovalWaiting = [];
+    List<ServiceProvider> approvedClinic = [];
    Loader loader = Get.put(Loader());
    TextEditingController loginEmailController = TextEditingController();
     TextEditingController loginPasswordController = TextEditingController();
@@ -42,7 +44,24 @@ var currentUserId;
       update();
     }
   }
-   
+     
+
+     showclinicApproved()async{
+       approvedClinic.clear();
+      await  FirebaseFirestore.instance.collection("AddService").where('approved', isEqualTo:true).get().then((value)  {
+       if(value.size > 0){
+         value.docs.forEach((element) {
+            var approvedClinicQuery = ServiceProvider.fromDocumentSnapShot(element);
+            approvedClinic.add(approvedClinicQuery);
+         });
+         update();
+        
+       }
+      });
+     }
+
+
+
    showServiceData()async{
      servicesApprovalWaiting.clear();
     await FirebaseFirestore.instance.collection("AddService").get().then((value) {

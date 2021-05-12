@@ -3,6 +3,7 @@ import 'package:tabib/controller/admin_controller.dart';
 import 'package:tabib/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tabib/screen/settings/AdminScreens/ApprovedClinic.dart';
 import 'package:tabib/screen/settings/AdminScreens/approval_waiting.dart';
 import 'package:tabib/screen/settings/AdminScreens/approved.dart';
 import 'package:tabib/screen/settings/AdminScreens/serviceApproval.dart';
@@ -62,7 +63,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with  SingleTickerPro
                            adminController.showData();
                             break;
                           case 1:
-                             adminController.showData();
+                             adminController.showclinicApproved();
                             break;
                           case 2:
                               adminController.showServiceData();
@@ -102,7 +103,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> with  SingleTickerPro
                     physics: NeverScrollableScrollPhysics(),
                     children: <Widget>[
                      ApprovalWaiting(),
-                       ApprovalWaiting(),
+                       ApprovedClinic(),
                          ServiceApproval(),
                      
                       // Center(

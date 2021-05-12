@@ -4,14 +4,79 @@ import 'package:tabib/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-
-
+import 'dart:io';
 class ServiceApproval extends StatefulWidget {
   @override
   _ServiceApprovalState createState() => _ServiceApprovalState();
 }
 
 class _ServiceApprovalState extends State<ServiceApproval> {
+   
+  
+
+    // _imgFromCamera(String photoPic) async {
+    //   final pickedFile = await ImagePicker()
+    //       .getImage(source: ImageSource.camera, imageQuality: 50);
+
+    //   setState(() {
+    //     if (pickedFile != null) {
+         
+    //           userController.profilePhoto = File(pickedFile.path);
+             
+       
+    //           userController.uploadFile();
+              
+    //     }
+    //   });
+    // }
+
+    // _imgFromGallery(String photoPic) async {
+    //   final pickedFile = await ImagePicker()
+    //       .getImage(source: ImageSource.gallery, imageQuality: 50);
+
+    //   setState(() {
+    //     if (pickedFile != null) {
+    //       photoPic == "profilePhoto"
+    //           ? userController.profilePhoto = File(pickedFile.path)
+    //           : userController.coverPhoto = File(pickedFile.path);
+    //       photoPic == "profilePhoto"
+    //           ? userController.uploadFile()
+    //           : userController.uploadFileCover();
+    //     }
+    //   });
+    // }
+
+    // void _showPickerImage(String photo) {
+    //   showModalBottomSheet(
+    //       context: context,
+    //       builder: (BuildContext bc) {
+    //         return SafeArea(
+    //           child: Container(
+    //             child: new Wrap(
+    //               children: <Widget>[
+    //                 new ListTile(
+    //                     leading: new Icon(Icons.photo_library),
+    //                     title: new Text('Photo Library'),
+    //                     onTap: () {
+    //                       _imgFromGallery(photo);
+    //                       Navigator.of(context).pop();
+    //                     }),
+    //                 new ListTile(
+    //                   leading: new Icon(Icons.photo_camera),
+    //                   title: new Text('Camera'),
+    //                   onTap: () {
+    //                     _imgFromCamera(photo);
+    //                     Navigator.of(context).pop();
+    //                   },
+    //                 ),
+    //               ],
+    //             ),
+    //           ),
+    //         );
+    //       });
+    // }
+
+
    int booList;
 
   AdminController adminController = Get.put(AdminController());

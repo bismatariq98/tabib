@@ -58,6 +58,9 @@ Map subCatMap =
            "timing":serviceProvider.timing,
            "category":serviceProvider.category,
            "subCategory":serviceProvider.subCategory,
+           "displayImage":"",
+           "id":currentUserId,
+           
 
     });
     Get.snackbar("suucess", "message");
