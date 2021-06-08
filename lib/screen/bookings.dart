@@ -36,7 +36,8 @@ class _BookingsState extends State<Bookings> {
                child: ListView.builder(
         itemCount: vehicles.length,
         itemBuilder: (context, i) {
-                return new ExpansionTile(
+                return new 
+                ExpansionTile(
                   title: new Text(vehicles[i].title, style: new TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),),
                   children: <Widget>[
                       new Column(

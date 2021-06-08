@@ -1,24 +1,33 @@
+import 'package:tabib/controller/admin_controller.dart';
 import 'package:tabib/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:get/get.dart';
 import 'package:tabib/screen/offerInfo.dart';
+
 class NewOffer extends StatefulWidget {
   @override
   _NewOfferState createState() => _NewOfferState();
 }
 
 class _NewOfferState extends State<NewOffer> {
+  
+  AdminController adminController  = Get.put(AdminController());
+
+
   var rating = 3.0;
   @override
   Widget build(BuildContext context) {
+    adminController.showApprovedService();
     return Scaffold(
-     body: Container(
+     body:
+     GetBuilder<AdminController>(builder: (_){
+      return   Container(
       height: Get.height,
        width: Get.width,
        child: ListView.builder(
-         itemCount: 8,
+         itemCount: _.serviceApproved.length,
          
          itemBuilder: (context,i){
            return Padding(
@@ -29,7 +38,16 @@ class _NewOfferState extends State<NewOffer> {
                    padding: const EdgeInsets.symmetric(horizontal: 13.0),
                    child: GestureDetector(
                      onTap: (){
-                       Get.to(OfferInfo());
+                       Get.to(OfferInfo(serviceName:_.serviceApproved[i].serviceName,
+                       serviceDescription:_.serviceApproved[i].description,
+                       actualPrice:_.serviceApproved[i].actualPrice,
+                       discountedPrice:_.serviceApproved[i].discountedPrice,
+                       clinicLocation:_.serviceApproved[i].clinicLocation,
+                       
+
+
+
+                       ));
                      },
                      child: Container(
                        height: 250,
@@ -84,13 +102,14 @@ class _NewOfferState extends State<NewOffer> {
                         children: [
                           Row(
                             children: [
-                            Text("R.1332",style: TextStyle(fontSize: 23),),
-                            Text("0099",style: TextStyle(decoration: TextDecoration.lineThrough,
+                            Text(_.serviceApproved[i].actualPrice,style: TextStyle(fontSize: 23),),
+                            SizedBox(width:10),
+                            Text(_.serviceApproved[i].discountedPrice,style: TextStyle(decoration: TextDecoration.lineThrough,
                             ))
                             ],
                           ),
-                         Text("Heading text",style: TextStyle(fontSize: 22),),
-                         Text("Heading text",style: TextStyle(fontSize: 15),),
+                         Text(_.serviceApproved[i].serviceName,style: TextStyle(fontSize: 22),),
+                         Text(_.serviceApproved[i].serviceProvideName,style: TextStyle(fontSize: 15),),
                         ],
                       ),
                      
@@ -116,7 +135,10 @@ class _NewOfferState extends State<NewOffer> {
              ),
            );
          }),
-      )
+      );
+     })
+     
+    
 
    
       );

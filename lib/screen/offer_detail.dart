@@ -4,6 +4,11 @@ import 'package:get/get.dart';
 import 'package:expandable/expandable.dart';
 import 'package:tabib/model/vehicle.dart';
 class OfferDetail extends StatefulWidget {
+
+  String serviceName,serviceDescription,actualPrice,discountedPrice,clinicLocation;
+
+  OfferDetail({this.serviceName,this.serviceDescription,this.actualPrice,this.discountedPrice,this.clinicLocation});
+
   @override
   _OfferDetailState createState() => _OfferDetailState();
 }
@@ -17,7 +22,9 @@ class _OfferDetailState extends State<OfferDetail> {
         height: Get.height,
         width: Get.width,
         child: SingleChildScrollView(
-          child: Column(children: [
+          child: Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             SizedBox(height: 20,),
             Container(
               height: 130,
@@ -46,17 +53,17 @@ class _OfferDetailState extends State<OfferDetail> {
                                   ),  SizedBox(width: 10,),
                                   Text("SR",style: TextStyle(fontSize: 22),),
                                   SizedBox(width: 10,),
-                                  Text("1972",style: TextStyle(fontSize: 22),),
+                                  Text(widget.actualPrice,style: TextStyle(fontSize: 22),),
                                     SizedBox(width: 10,),
 
- Text("0099",style: TextStyle(decoration: TextDecoration.lineThrough,
+ Text(widget.discountedPrice,style: TextStyle(decoration: TextDecoration.lineThrough,
                               ))
             ],)
                     ],),
                   ),
                   SizedBox(height: 10,),
                   Expanded(child: 
-                  Text("Descriotion are the only ting that can beandled very rfssionny ina w akklasdlkasdalhd",style: TextStyle(fontSize: 19),))
+                  Text(widget.serviceDescription,style: TextStyle(fontSize: 19),))
                 ],
               ),
             ),
@@ -74,8 +81,8 @@ class _OfferDetailState extends State<OfferDetail> {
                    children: [
                     Column(
                       children: [
-                      Text("Meharban",style: TextStyle(fontSize: 19),),
-                      Text("Marahaba")
+                      Text("Location",style: TextStyle(fontSize: 19),),
+                      Text(widget.clinicLocation ?? '')
                     ],),
                     Icon(Icons.location_city,size: 30,)
                  ],),

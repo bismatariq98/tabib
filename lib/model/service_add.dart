@@ -9,6 +9,7 @@ class Services {
       this.ref,this.serviceProvideName,this.actualPrice,
       this.description,this.discountedPrice,this.id,
      this.serviceName,this.category,this.subCategory,this.approved,
+     this.clinicLocation
       });
 
   String serviceProvideName;
@@ -18,16 +19,12 @@ class Services {
   String actualPrice;
   String discountedPrice;
   DocumentReference ref;
-
+  String clinicLocation;
   String displayImage;
   String timing;
   String category;
   bool approved;
   String subCategory;
- 
-
-  
-
   factory Services.fromDocumentSnapShot(DocumentSnapshot doc) => Services(
       serviceProvideName: doc.data()["serviceProviderName"],
       id: doc.data()["id"],
@@ -39,8 +36,7 @@ class Services {
      category: doc.data()["category"],
      subCategory: doc.data()["subCategory"],
      approved:doc.data()["approved"],
-
-       
+     clinicLocation: doc.data()["clinicLocation"],     
   );
 
   Map<String, dynamic> toMap() => {
@@ -56,5 +52,6 @@ class Services {
         "displayImage":displayImage,
         "timing":timing,
         "approved":approved,
+        "clinicLocation":clinicLocation,
       };
 }

@@ -54,8 +54,10 @@ var currentUserId;
          value.docs.forEach((element) {
             var serviceApprovedVar = Services.fromDocumentSnapShot(element);
             serviceApproved.add(serviceApprovedVar);
+            print(serviceApproved);
          });
          update();
+         
         
        }
       });
@@ -74,6 +76,8 @@ var currentUserId;
        }
       });
      }
+
+
 
 
 

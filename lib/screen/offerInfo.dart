@@ -8,6 +8,9 @@ import 'package:tabib/screen/reviews.dart';
 
 
 class OfferInfo extends StatefulWidget {
+   
+   String serviceName,serviceDescription,actualPrice,discountedPrice,clinicLocation;
+  OfferInfo({this.clinicLocation,this.discountedPrice,this.actualPrice,this.serviceName,this.serviceDescription});
   @override
   _OfferInfoState createState() => _OfferInfoState();
 }
@@ -46,6 +49,7 @@ class _OfferInfoState extends State<OfferInfo> with SingleTickerProviderStateMix
           IconButton(icon: Icon(Icons.message_outlined), onPressed: (){}),
           IconButton(icon: Icon(Icons.share_outlined), onPressed: (){}),
           IconButton(icon: Icon(Icons.favorite_border_outlined), onPressed: (){}),
+          
         ],
 
       ),
@@ -74,7 +78,8 @@ class _OfferInfoState extends State<OfferInfo> with SingleTickerProviderStateMix
                   child: TabBarView(
                     controller: _tabController,
                     children: [
-                     OfferDetail(),
+
+                     OfferDetail(serviceName:widget.serviceName,serviceDescription:widget.serviceDescription,actualPrice:widget.actualPrice,discountedPrice:widget.discountedPrice,clinicLocation:widget.clinicLocation,),
                       Bookings(),
                       Reviews(),
                       Pictures(),

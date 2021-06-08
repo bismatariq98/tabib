@@ -225,7 +225,24 @@ class _HomeScreenState extends State<HomeScreen> {
                      ],),
                    ),
                    ),
+                   Padding(
+                       padding: EdgeInsets.all(18.0),
+                     child: Column(children: [
+                        GestureDetector(
+                          onTap: (){
+                            Get.to("");
+                          },
+                                                  child: Container(
+                            height: 50,
+                            width: 80,
+                            decoration: BoxDecoration(
+                            color:Colors.red,
 
+                            ),
+
+                          ),
+                        )
+                     ],),)
              ],),
            ),
         ),
