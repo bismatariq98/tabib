@@ -9,12 +9,14 @@ import 'package:tabib/screen/reviews.dart';
 class OfferInfo extends StatefulWidget {
   String serviceName,
       serviceDescription,
+      serviceProviderName,
       actualPrice,
       discountedPrice,
       clinicLocation;
   OfferInfo(
       {this.clinicLocation,
       this.discountedPrice,
+      this.serviceProviderName,
       this.actualPrice,
       this.serviceName,
       this.serviceDescription});
@@ -102,7 +104,7 @@ class _OfferInfoState extends State<OfferInfo>
                   discountedPrice: widget.discountedPrice,
                   clinicLocation: widget.clinicLocation,
                 ),
-                Bookings(),
+                Bookings(widget.serviceName),
                 Reviews(),
                 Pictures(),
               ]),
