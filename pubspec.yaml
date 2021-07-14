@@ -38,7 +38,12 @@ dependencies:
   flutter_easyloading: ^3.0.0
   toggle_switch: ^0.1.9
   time_range_picker: ^2.0.1
+  transparent_image: ^2.0.0
   image_picker: ^0.7.4
+  flutter_login: ^2.1.0
+  firebase_messaging: ^10.0.3
+  introduction_screen: ^2.1.0
+  lottie: ^1.1.0
 
 
 

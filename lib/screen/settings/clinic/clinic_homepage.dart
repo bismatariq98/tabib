@@ -232,19 +232,19 @@ class _ClinicHomePageState extends State<ClinicHomePage> {
                           ),
                           SizedBox(height:10),
 
-                          ElevatedButton(
-          onPressed: () async {
-            TimeRange result = await showTimeRangePicker(
-              context: context,
-            );
+        //                   ElevatedButton(
+        //   onPressed: () async {
+        //     TimeRange result = await showTimeRangePicker(
+        //       context: context,
+        //     );
 
-             _.times =  result;
-             _.update();
+        //      _.times =  result;
+        //      _.update();
           
-          },
-           child: Text("Time Selection"),
-        ),
-        Text( _.times.toString() ,),
+        //   },
+        //    child: Text("Time Selection"),
+        // ),
+        // Text( _.times.toString() ,),
             
                      
 

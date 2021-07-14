@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tabib/Widget/SettingContainer.dart';
 import 'package:tabib/Widget/bottomButton.dart';
 import 'package:tabib/const/textstyle.dart';
@@ -15,13 +16,14 @@ import 'package:tabib/screen/settings/policies.dart';
 import 'package:tabib/screen/settings/profile.dart';
 import 'package:tabib/screen/settings/notification.dart';
 import 'package:tabib/screen/sub_Cat.dart';
+import 'package:tabib/screen/user_signup.dart';
 import 'mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:tabib/controller/user_sign_in_controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
+import 'package:flutter_login/flutter_login.dart';
 import 'settings/AdminScreens/approval_waiting.dart';
 class Settings extends StatefulWidget {
   @override
@@ -227,7 +229,13 @@ class _SettingsState extends State<Settings> {
                     Divider(height: 3,color: Colors.black,),
                 GestureDetector(
                   onTap: (){
+                    var userId = FirebaseAuth.instance.currentUser;
+                    if(userId != null){
                   Get.to(AddClinic());
+                    }
+                  else{
+                    Get.to(UserLogin());
+                  }
                   },
                   child: SettingContainer(Icons.house,"Add Clinic")),
                      GestureDetector(
