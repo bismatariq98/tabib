@@ -6,10 +6,12 @@ import 'package:tabib/screen/mainScreen.dart';
 import 'package:get/get.dart';
 import 'package:tabib/screen/onBoarding.dart';
 import 'package:lottie/lottie.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 
 void main() async {
     WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+   await FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: 'recaptcha-v3-site-key');
   runApp(App());
 
 } 
@@ -23,7 +25,8 @@ class App extends StatelessWidget {
       SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),
     );
 
-    return GetMaterialApp(
+    return 
+    GetMaterialApp(
       title: 'Introduction screen',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),

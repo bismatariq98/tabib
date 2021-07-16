@@ -372,7 +372,12 @@ class _ClinicHomePageState extends State<ClinicHomePage> {
                   });
                   // uploadFile().whenComplete(() => Navigator.of(context).pop());
                           //  await uploadFile();
+                          
+                          // await _.
                           await _.addService();
+
+
+
                            
                       
                          },

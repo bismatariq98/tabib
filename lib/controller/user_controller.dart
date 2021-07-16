@@ -39,7 +39,7 @@ class UserController extends GetxController {
       update();
       loader.loadingDismiss();
       clearForm();
-      Get.to(() => ClinicHomePage());
+      Get.to(() => AddClinic());
 
       // updateToken(currentUserId);
     } catch (e) {

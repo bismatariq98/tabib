@@ -1,7 +1,10 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tabib/controller/loading_controller.dart';
 import 'package:tabib/main.dart';
@@ -14,10 +17,58 @@ import 'package:time_range_picker/time_range_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as Path;
 
+
 import '../model/service_add.dart';
 import '../model/service_add.dart';
 
 class ClinicController extends GetxController {
+
+// List<File> _paths = [];
+// List<File> _tasks = [];
+
+// Future uploadToFirebase() async {
+//     try {
+//       _paths.forEach((path) async {
+//         File file = File(path);
+//         final fileName = Path.basename(file.path);
+//         final destination = 'files/$fileName';
+//         task = uploadFile(destination, file);
+//       //   _tasks.add(task!);
+//         if (task == null) return;
+//        final snapshot = await task.whenComplete(() {});
+//         final urlDownload = await snapshot.ref.getDownloadURL();
+//         print('Download-Link: $urlDownload');
+//       });
+//        setState(() {
+//         _tasks.add(task);
+//     });
+//       //_tasks.add(task!);
+//       print('TasksList ${ _tasks.length}');
+//     } on PlatformException catch (e) {
+//       print(e.toString());
+//     }
+//   }
+// static UploadTask  uploadFile(String destination, File file) {
+//     try {
+//       final ref = FirebaseStorage.instance.ref(destination);
+//       return ref.putFile(file);
+//     } on FirebaseException catch (e) {
+//       return null;
+//     }
+//   }
+//   static UploadTask uploadBytes(String destination, Uint8List data) {
+//     try {
+//       final ref = FirebaseStorage.instance.ref(destination);
+//       return ref.putData(data);
+//     } on FirebaseException catch (e) {
+//       return null;
+//     }
+//   }
+
+
+
+
+
   TimeRange times;
   List cat = ["Dental", "Dermatology", "Fitness", "Spa"]; //ya main list hage
   Map subCatMap = {
@@ -50,12 +101,12 @@ class ClinicController extends GetxController {
   ]; //eski zrurt q pasih ae ?
   String selectedCat = "Dental"; //ya by default ya show hga phlu
   String selectedSubCat = "d1";
-  var currentUserId;
+  String currentUserId;
   bool uploading = false;
   double val = 0;
 
   firebase_storage.Reference ref;
-
+ 
   List<File> image = [];
   final picker = ImagePicker();
   Services serviceProvider = Services();
@@ -80,28 +131,46 @@ class ClinicController extends GetxController {
       print(response.file);
     }
   }
+  List<String> downloadList = [];
 
-  Future uploadFile(String id) async {
+  Future uploadFile(List<File>images,String id) async {
+     
     int i = 1;
 
-    for (var img in image) {
-      val = i / image.length;
+    for (var img in images) {
+      val = i / images.length;
       update();
       ref = firebase_storage.FirebaseStorage.instance
           .ref()
           .child('images/${Path.basename(img.path)}');
       await ref.putFile(img).whenComplete(() async {
-        await ref.getDownloadURL().then((value) {
-          FirebaseFirestore.instance
-              .collection("AddService")
-              .doc(id)
-              .update({'displayImage': value});
-          i++;
-        });
+        final  download =  await  ref.getDownloadURL();
+          print('TasksList ${ download}');
+           downloadList.add(download);
+            
+
+        // .then((value) {
+        //   // print()
+        //   FirebaseFirestore.instance
+        //       .collection("AddService")
+        //       .doc(currentUserId)
+        //       .update({'imagesList': value});
+        //   i++;
+        // });
+
       });
 
+      
       Get.snackbar("Successfull", "Uploaded Successfully");
     }
+    uploadFirestore(downloadList);
+  }
+  uploadFirestore(List<String> downloadUrl){
+  FirebaseFirestore.instance
+              .collection("AddService")
+              .doc(currentUserId)
+              .update({'imagesList': downloadUrl});
+              Get.snackbar("title", "UploadSucccesfuill");
   }
 
   addService() async {
@@ -116,7 +185,7 @@ class ClinicController extends GetxController {
     try {
       await FirebaseFirestore.instance
           .collection("AddService")
-          .doc("currentUserId")
+          .doc(currentUserId)
           .set({
         "serviceName": serviceProvider.serviceName,
         "serviceProviderName": serviceProvider.serviceProvideName,
@@ -131,7 +200,7 @@ class ClinicController extends GetxController {
         "approved": false,
         "imagesList": "",
       }).then((value) async {
-        await uploadFile(currentUserId);
+        await uploadFile(image,currentUserId);
       });
       Get.snackbar("suucess", "message");
     } catch (e) {

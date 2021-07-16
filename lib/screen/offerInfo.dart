@@ -13,13 +13,16 @@ class OfferInfo extends StatefulWidget {
       actualPrice,
       discountedPrice,
       clinicLocation;
+      List imagesList;
   OfferInfo(
       {this.clinicLocation,
       this.discountedPrice,
       this.serviceProviderName,
       this.actualPrice,
       this.serviceName,
-      this.serviceDescription});
+      this.serviceDescription,
+      this.imagesList,
+      });
   @override
   _OfferInfoState createState() => _OfferInfoState();
 }
@@ -106,7 +109,7 @@ class _OfferInfoState extends State<OfferInfo>
                 ),
                 Bookings(widget.serviceName),
                 Reviews(),
-                Pictures(),
+                Pictures(imagesList:widget.imagesList),
               ]),
             )
           ],

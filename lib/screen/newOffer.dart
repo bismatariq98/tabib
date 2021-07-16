@@ -34,6 +34,7 @@ class _NewOfferState extends State<NewOffer> {
                       child: GestureDetector(
                         onTap: () {
                           Get.to(OfferInfo(
+                           
                             serviceName: _.serviceApproved[i].serviceName,
                             serviceDescription:
                                 _.serviceApproved[i].description,
@@ -43,6 +44,7 @@ class _NewOfferState extends State<NewOffer> {
                             discountedPrice:
                                 _.serviceApproved[i].discountedPrice,
                             clinicLocation: _.serviceApproved[i].clinicLocation,
+                            imagesList:_.serviceApproved[i].imagesList,
                           ));
                         },
                         child: Container(

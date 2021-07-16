@@ -13,7 +13,11 @@ class Services {
       this.subCategory,
       this.approved,
       this.clinicReference,
-      this.clinicLocation});
+      this.clinicLocation,
+      this.imagesList,
+      
+      
+      });
 
   String serviceProvideName;
   String id;
@@ -26,11 +30,13 @@ class Services {
   String displayImage;
   String timing;
   String category;
+  List imagesList;
   bool approved;
   String subCategory;
   DocumentReference clinicReference;
   factory Services.fromDocumentSnapShot(DocumentSnapshot doc) => Services(
       serviceProvideName: doc.data()["serviceProviderName"],
+      imagesList: doc.data()["imagesList"],
       id: doc.data()["id"],
       serviceName: doc.data()["serviceName"],
       description: doc.data()["description"],
@@ -45,6 +51,7 @@ class Services {
 
   Map<String, dynamic> toMap() => {
         "serviceProviderName": serviceProvideName,
+        "imagesList":imagesList,
         "id": id,
         "serviceName": serviceName,
         "description": description,

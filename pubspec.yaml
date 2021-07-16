@@ -44,6 +44,7 @@ dependencies:
   firebase_messaging: ^10.0.3
   introduction_screen: ^2.1.0
   lottie: ^1.1.0
+  firebase_app_check: ^0.0.1+2
 
 
 

@@ -4,6 +4,11 @@ import 'package:get/get.dart';
 import 'package:tabib/model/userModel.dart';
 
 class Pictures extends StatefulWidget {
+   
+   List imagesList;
+   Pictures({this.imagesList});
+
+
   @override
   _PicturesState createState() => _PicturesState();
 }
@@ -23,7 +28,7 @@ class _PicturesState extends State<Pictures> {
                                               mainAxisSpacing: 7.0,
                                               crossAxisSpacing: 7.0
                                               ), 
-                                               itemCount:categories.length ,
+                                               itemCount:widget.imagesList.length ,
                                               itemBuilder:(context,i){
                                                 return 
                                                
@@ -31,7 +36,7 @@ class _PicturesState extends State<Pictures> {
                                                   width: 60,
                                                   height: 140,
                                                   decoration: BoxDecoration(
-                                                   image: DecorationImage(image: AssetImage(categories[i].image),fit: BoxFit.cover)
+                                                   image: DecorationImage(image: NetworkImage(widget.imagesList[i]),fit: BoxFit.cover)
                                                    
                                                   ),
                                                  
