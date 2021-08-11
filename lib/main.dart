@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:tabib/provider/clinic_provider.dart';
 import 'package:tabib/screen/mainScreen.dart';
 import 'package:get/get.dart';
 import 'package:tabib/screen/onBoarding.dart';
@@ -9,14 +11,12 @@ import 'package:lottie/lottie.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 
 void main() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-   await FirebaseAppCheck.instance.activate(webRecaptchaSiteKey: 'recaptcha-v3-site-key');
+  await FirebaseAppCheck.instance
+      .activate(webRecaptchaSiteKey: 'recaptcha-v3-site-key');
   runApp(App());
-
-} 
-
-
+}
 
 class App extends StatelessWidget {
   @override
@@ -25,12 +25,19 @@ class App extends StatelessWidget {
       SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),
     );
 
-    return 
-    GetMaterialApp(
-      title: 'Introduction screen',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: OnBoardingPage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ClinicProvider>(
+          create: (_) => ClinicProvider(),
+          lazy: false,
+        ),
+      ],
+      child: GetMaterialApp(
+        title: 'Introduction screen',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: OnBoardingPage(),
+      ),
     );
   }
 }
@@ -60,7 +67,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   // }
 
   Widget _buildImage(String assetName, [double width = 350]) {
-    return Lottie.asset('asset/$assetName',);
+    return Lottie.asset(
+      'asset/$assetName',
+    );
   }
 
   @override
@@ -83,7 +92,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(top: 16, right: 16),
-            // child: 
+            // child:
             //  _buildImage('doctor.json'),
           ),
         ),
@@ -92,21 +101,20 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         width: double.infinity,
         height: 60,
         color: Colors.pink,
-        
-        child: 
-        GestureDetector(
+        child: GestureDetector(
           onTap: () => _onIntroEnd(context),
           child: Container(
             width: Get.width,
             color: Colors.pink,
-            
             child: Center(
               child: const Text(
                 'Let\s go right away!',
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,color:Colors.white),
+                style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
             ),
-            
           ),
         ),
       ),
@@ -127,8 +135,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         ),
         PageViewModel(
           title: "Pay online",
-          body:
-              "Pay online instant using multiple platforms and you are done",
+          body: "Pay online instant using multiple platforms and you are done",
           image: _buildImage('pay.json'),
           decoration: pageDecoration,
         ),
@@ -191,9 +198,16 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       skipFlex: 0,
       nextFlex: 0,
       //rtl: true, // Display as right-to-left
-      skip: const Text('Skip',style: TextStyle(color:Colors.white),),
-      next: const Icon(Icons.arrow_forward,color: Colors.white,),
-      done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600,color:Colors.white)),
+      skip: const Text(
+        'Skip',
+        style: TextStyle(color: Colors.white),
+      ),
+      next: const Icon(
+        Icons.arrow_forward,
+        color: Colors.white,
+      ),
+      done: const Text('Done',
+          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white)),
       curve: Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),
       // controlsPadding: kIsWeb
@@ -203,7 +217,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         size: Size(10.0, 10.0),
         color: Colors.white,
         activeSize: Size(22.0, 10.0),
-        
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
@@ -225,31 +238,12 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text('Home')),
       body: Column(
         children: [
-          Center(child: 
-          
-          Text("This is the screen after Introduction")),
-
-        
+          Center(child: Text("This is the screen after Introduction")),
         ],
       ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // void main() async{
 //   WidgetsFlutterBinding.ensureInitialized();

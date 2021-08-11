@@ -345,7 +345,7 @@ class _AddClinicState extends State<AddClinic> {
                                 '-' +
                                 dayTiming[i]['closingTime'].minute.toString();
                       }
-                      await userController.addClinic(dayTiming);
+                      await userController.addClinic(dayTiming, context);
                     } else {
                       setState(() {
                         timeSelectionErrorMessage =

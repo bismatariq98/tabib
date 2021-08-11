@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:tabib/controller/loading_controller.dart';
 import 'package:tabib/main.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:tabib/model/service_provider_model.dart';
 import 'package:tabib/model/userdata.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:tabib/provider/clinic_provider.dart';
 import 'package:tabib/screen/settings/addClininc.dart';
 import 'package:tabib/screen/settings/clinic/clinic_homepage.dart';
 
@@ -23,18 +25,16 @@ class UserController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController signUpemailController = TextEditingController();
   TextEditingController signUppasswordController = TextEditingController();
- 
-  TextEditingController complaintController = TextEditingController();
-   
 
-    Future signIn() async {
+  TextEditingController complaintController = TextEditingController();
+
+  Future signIn() async {
     UserCredential userCredential;
 
     try {
       loader.loadingShow();
       userCredential = await firebaseAuth.signInWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text);
+          email: emailController.text, password: passwordController.text);
       currentUserId = userCredential.user.uid.toString();
       update();
       loader.loadingDismiss();
@@ -50,8 +50,6 @@ class UserController extends GetxController {
       update();
     }
   }
-   
-
 
   clearForm() {
     serviceProviderNameController.text = '';
@@ -68,10 +66,10 @@ class UserController extends GetxController {
   bool status1 = false;
   bool isLoading = false;
   DocumentReference docReference;
-     String currentUserId;
+  String currentUserId;
 
-     /* ------------------------------ sign up user ------------------------------ */
-      Future addUserData() async {
+  /* ------------------------------ sign up user ------------------------------ */
+  Future addUserData() async {
     FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
     await firebaseMessaging.requestPermission(
       alert: true,
@@ -87,15 +85,14 @@ class UserController extends GetxController {
 
     FirebaseFirestore.instance.collection('Users').doc(currentUserId).set(
       {
-      
         'UserId': currentUserId,
         'Email': userData.email,
-       
         "token": token,
       },
     );
     return true;
   }
+
   signUp() async {
     loader.loadingShow();
 
@@ -126,7 +123,49 @@ class UserController extends GetxController {
       Get.snackbar('Error', e.message);
     }
   }
-  addClinic(dayTiming) async {
+
+  addClinic(
+    dayTiming,
+    BuildContext context,
+  ) async {
+    isLoading = true;
+    loader.loadingShow();
+
+    serviceProvider.email = emailController.text;
+    serviceProvider.phoneNumber = phoneNumberController.text;
+    serviceProvider.serviceProvideName = serviceProviderNameController.text;
+    serviceProvider.city = cityController.text;
+    serviceProvider.streetName = streetNameController.text;
+    serviceProvider.documentId = FirebaseFirestore.instance
+        .collection("clinicapproval")
+        .doc(currentUserId)
+        .id
+        .toString();
+    Provider.of<ClinicProvider>(context, listen: false)
+        .changeCurrentUserId(currentUserId);
+
+    await FirebaseFirestore.instance
+        .collection("clinicapproval")
+        .doc(currentUserId)
+        .set({
+      "serviceProviderEmail": serviceProvider.email,
+      "serviceProviderName": serviceProvider.serviceProvideName,
+      "serviceProviderCity": serviceProvider.city,
+      "serviceProviderPhone": serviceProvider.phoneNumber,
+      "serviceProviderStreet": serviceProvider.streetName,
+      // "clinicDoc":doc.reference,
+      "approved": false,
+      "timing": dayTiming,
+      "documentId": serviceProvider.documentId,
+      "userId": currentUserId
+    }).then((value) {
+      isLoading = false;
+      update();
+      clearForm();
+    });
+  }
+
+  Future updateClinicBooking(dayTime) async {
     isLoading = true;
     loader.loadingShow();
     //  loading.loadingShow();
@@ -136,27 +175,19 @@ class UserController extends GetxController {
     serviceProvider.serviceProvideName = serviceProviderNameController.text;
     serviceProvider.city = cityController.text;
     serviceProvider.streetName = streetNameController.text;
-    // DocumentSnapshot doc;
-    
+    serviceProvider.documentId = FirebaseFirestore.instance
+        .collection("clinicapproval")
+        .doc(currentUserId)
+        .id
+        .toString();
+
     await FirebaseFirestore.instance
         .collection("clinicapproval")
         .doc(currentUserId)
-        .set(
-        
-         
-          {
-      "serviceProviderEmail": serviceProvider.email,
-      "serviceProviderName": serviceProvider.serviceProvideName,
-      "serviceProviderCity": serviceProvider.city,
-      "serviceProviderPhone": serviceProvider.phoneNumber,
-      "serviceProviderStreet": serviceProvider.streetName,
-      // "clinicDoc":doc.reference,
-      "approved": false,
-      "timing": dayTiming,
-      "userId":currentUserId
-    }
-    ).then((value) {
-       
+        .update({
+      "timing": dayTime,
+      "documentId": serviceProvider.documentId,
+    }).then((value) {
       isLoading = false;
       update();
       clearForm();
